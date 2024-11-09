@@ -99,7 +99,7 @@ module aiSearch 'module/ai-search.bicep' = {
   name: 'ai-search'
   scope: resourceGroup
   params: {
-    name: 'search-${uniqueServiceName}'
+    name: 'aisearch-${uniqueServiceName}'
     location: location
   }
 }

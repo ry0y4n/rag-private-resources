@@ -1,6 +1,6 @@
 targetScope = 'subscription'
 
-param resourceGroupName string = 'rg-p-openai_kp0-codewith' 
+param resourceGroupName string = 'rg-p-openai_kp0-codewith6' 
 param location string = 'japaneast'
 param uniqueServiceName string = uniqueString(resourceGroupName)
 
@@ -38,6 +38,7 @@ module funcASP 'module/app-service-plan.bicep' = {
     kind: 'elastic'
     properties: {
       maximumElasticWorkerCount: 20
+      reserved: true
     }
   }
 }
@@ -79,8 +80,10 @@ module openAiModule 'module/aoai.bicep' = {
     location: 'westus3'
     openAiName: 'aoai-${uniqueServiceName}'
     openAiSku: 'S0'
-    gpt35ModelCapacity: 50
-    gpt35ModelVersion: '0125'
+    // gpt35ModelCapacity: 50
+    // gpt35ModelVersion: '0125'
+    gpt4oModelCapacity: 50
+    gpt4oModelVersion: '2024-08-06'
   }
 }
 

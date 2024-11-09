@@ -12,10 +12,6 @@ resource appService 'Microsoft.Web/sites@2022-09-01' = {
     publicNetworkAccess: publicNetworkAccess
     // virtualNetworkSubnetId: subnetId
     // vnetRouteAllEnabled: true
-    // siteConfig: {
-    //   linuxFxVersion: 'NODE|20-lts'
-    // }
-    // reserved: true
   }
 }
 

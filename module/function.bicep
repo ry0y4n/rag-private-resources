@@ -18,24 +18,13 @@ param functionWorkerRuntime string = 'python'
   'Windows'
   'Linux'
 ])
-param functionPlanOS string = 'Windows'
-
-// @description('Specifies the Azure Function hosting plan SKU.')
-// @allowed([
-//   'EP1'
-//   'EP2'
-//   'EP3'
-// ])
-// param functionAppPlanSku string = 'EP1'
-
-// @description('The name of the Azure Function hosting plan.')
-// param functionAppPlanName string = 'asp-func-${uniqueString(resourceGroup().id)}'
+param functionPlanOS string = 'Linux'
 
 @description('The name of the backend Azure storage account used by the Azure Function app.')
 param functionStorageAccountName string
 
 @description('Only required for Linux app to represent runtime stack in the format of \'runtime|runtimeVersion\'. For example: \'python|3.9\'')
-param linuxFxVersion string = ''
+param linuxFxVersion string = 'Python|3.11'
 
 param existingAppServicePlanId string
 
@@ -76,6 +65,7 @@ resource functionApp 'Microsoft.Web/sites@2022-03-01' = {
     publicNetworkAccess: 'Disabled'
     // virtualNetworkSubnetId: functionSubnetId
     // vnetRouteAllEnabled: true
+    vnetContentShareEnabled: true
     siteConfig: {
       functionsRuntimeScaleMonitoringEnabled: true
       linuxFxVersion: (isReserved ? linuxFxVersion : null)
@@ -99,18 +89,6 @@ resource functionApp 'Microsoft.Web/sites@2022-03-01' = {
         {
           name: 'FUNCTIONS_WORKER_RUNTIME'
           value: functionWorkerRuntime
-        }
-        {
-          name: 'WEBSITE_NODE_DEFAULT_VERSION'
-          value: '~14'
-        }
-        {
-          name: 'WEBSITE_VNET_ROUTE_ALL'
-          value: '1'
-        }
-        {
-          name: 'WEBSITE_CONTENTOVERVNET'
-          value: '1'
         }
       ]
     }

@@ -1,10 +1,10 @@
 param location string
 param openAiName string
 param openAiSku string
-// param gpt4ModelCapacity int
-// param gpt4ModelVersion string
-param gpt35ModelCapacity int
-param gpt35ModelVersion string
+param gpt4oModelCapacity int
+param gpt4oModelVersion string
+// param gpt35ModelCapacity int
+// param gpt35ModelVersion string
 
 resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   name: openAiName
@@ -22,18 +22,36 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   }
 }
 
-resource gpt35Model 'Microsoft.CognitiveServices/accounts/deployments@2023-10-01-preview' = {
+// resource gpt35Model 'Microsoft.CognitiveServices/accounts/deployments@2023-10-01-preview' = {
+//   parent: openAi
+//   name: 'gpt-35-turbo'
+//   sku: {
+//     name: 'Standard'
+//     capacity: gpt35ModelCapacity
+//   }
+//   properties: {
+//     model: {
+//       format: 'OpenAI'
+//       name: 'gpt-35-turbo'
+//       version: gpt35ModelVersion
+//     }
+//     versionUpgradeOption: 'OnceNewDefaultVersionAvailable'
+//     raiPolicyName: 'Microsoft.Default'
+//   }
+// }
+
+resource gpt4oModel 'Microsoft.CognitiveServices/accounts/deployments@2023-10-01-preview' = {
   parent: openAi
-  name: 'gpt-35-turbo'
+  name: 'gpt-4o'
   sku: {
     name: 'Standard'
-    capacity: gpt35ModelCapacity
+    capacity: gpt4oModelCapacity
   }
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-35-turbo'
-      version: gpt35ModelVersion
+      name: 'gpt-4o'
+      version: gpt4oModelVersion
     }
     versionUpgradeOption: 'OnceNewDefaultVersionAvailable'
     raiPolicyName: 'Microsoft.Default'

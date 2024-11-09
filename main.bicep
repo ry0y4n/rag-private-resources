@@ -38,7 +38,6 @@ module funcASP 'module/app-service-plan.bicep' = {
     kind: 'elastic'
     properties: {
       maximumElasticWorkerCount: 20
-      reserved: true
     }
   }
 }

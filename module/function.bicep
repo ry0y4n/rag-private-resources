@@ -66,22 +66,6 @@ resource share 'Microsoft.Storage/storageAccounts/fileServices/shares@2022-05-01
   ]
 }
 
-// resource functionAppPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
-//   name: functionAppPlanName
-//   location: location
-//   sku: {
-//     tier: 'ElasticPremium'
-//     name: functionAppPlanSku
-//     size: functionAppPlanSku
-//     family: 'EP'
-//   }
-//   kind: 'elastic'
-//   properties: {
-//     maximumElasticWorkerCount: 20
-//     reserved: isReserved
-//   }
-// }
-
 resource functionApp 'Microsoft.Web/sites@2022-03-01' = {
   name: functionAppName
   location: location
@@ -94,7 +78,7 @@ resource functionApp 'Microsoft.Web/sites@2022-03-01' = {
     // vnetRouteAllEnabled: true
     siteConfig: {
       functionsRuntimeScaleMonitoringEnabled: true
-      linuxFxVersion: (isReserved ? linuxFxVersion : json('null'))
+      linuxFxVersion: (isReserved ? linuxFxVersion : null)
       appSettings: [
         {
           name: 'AzureWebJobsStorage'

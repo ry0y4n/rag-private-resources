@@ -77,7 +77,7 @@ module openAiModule 'module/aoai.bicep' = {
   scope: resourceGroup
   name: 'azure-openai'
   params: {
-    location: 'westus3'
+    location: location
     openAiName: 'aoai-${uniqueServiceName}'
     openAiSku: 'S0'
     // gpt35ModelCapacity: 50
